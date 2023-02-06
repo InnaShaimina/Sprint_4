@@ -65,10 +65,6 @@ public class OrderPageScooter {
     public void setSimpleInputField(By elementLocator, String textValue) {
         driver.findElement(elementLocator).sendKeys(textValue);
     }
-    //метод, пунькающий кнопочку
-    //public void clickButton(By elementLocator) {
-        //driver.findElement(elementLocator).click();
-    //}
     //метод, получающий и возвращающий value элемента
     public String getFieldValue() {
         return driver.findElement(nameField).getAttribute("value");

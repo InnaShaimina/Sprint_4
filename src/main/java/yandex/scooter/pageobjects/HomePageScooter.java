@@ -16,14 +16,8 @@ public class HomePageScooter {
     public By getOrderButton(){
         return orderButton;
     }
-    private By accordeonButton = By.xpath("//div[@id='accordion__heading-0']");
-    public By getAccordeonButton(){
-        return accordeonButton;
-    }
-    private By accordeonText = By.xpath("//div[@id='root']//div[@class='Home_FourPart__1uthg']//div[@class='accordion']/div[1]/div[@role='region']");//текст раскрытого аккордеона
-    public By getAccordeonText(){
-        return accordeonText;
-    }
+    private By accordeonButton = By.xpath("//div[@id='accordion__heading-0']"); // локатор первого аккордеона
+    private By accordeonText = By.xpath("//div[@id='accordion__panel-0']");   // текст первого раскрытого аккордеона
     public HomePageScooter(WebDriver driver){
         this.driver = driver;
     }
@@ -39,5 +33,17 @@ public class HomePageScooter {
     //метод, получающий и возвращающий текст элемента
     public String getElementText(By elementLocator) {
         return driver.findElement(elementLocator).getText();
+    }
+    //метод, открывающий один из элементов аккордеона по его индексу
+    public void expandAccordeon(String index) {
+        String accordeonLocator = "//div[@id='accordion__heading-" + index + "']";
+        scrollToElement(By.xpath(accordeonLocator));
+        driver.findElement(By.xpath(accordeonLocator)).click();
+    }
+    //метод, возвращающий текст раскрытого элемента аккордеона по его индексу
+    public String getTextWithinAccordeon(String index) {
+        String expandedAccordeonTextLocator = "//div[@id='accordion__panel-" + index + "']";
+        scrollToElement(By.xpath(expandedAccordeonTextLocator));
+        return getElementText(By.xpath(expandedAccordeonTextLocator));
     }
 }
